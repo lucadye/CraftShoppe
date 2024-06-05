@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { useState, useEffect } from 'react';
+import { getProduct } from '../api/products';
+
 function CartButton() {
   return (
     <Button
@@ -13,24 +16,28 @@ function CartButton() {
   );
 }
 
+function ProductCard({id}) {
+  const [product, setProduct] = useState(undefined);
+
+  useEffect(() => {
+    getProduct(id).then(r => setProduct(r));
+  }, []);
+
+  return product === undefined ? (
+    <Card placeholder />
+  ) : (
+    <Card title={product.name}
+      src={product.images[0]}
+      button={CartButton}
+      >{product.description}
+    </Card>
+  );
+}
+
 function FeaturedProducts() {
   return (<Container fluid className="d-flex justify-content-between flex-wrap">
     <h2>Featured Products</h2>
-    <Card title="Heart Button <3"
-      src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      button={CartButton}
-      >A quality metal button with a simple heart design.
-    </Card>
-    <Card title="Heart Button <3"
-      src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      button={CartButton}
-      >A quality metal button with a simple heart design.
-    </Card>
-    <Card title="Heart Button <3"
-      src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      button={CartButton}
-      >A quality metal button with a simple heart design.
-    </Card>
+    <ProductCard id="1"/>
     <div className="d-flex justify-content-center" style={{width: '100%'}}>
       <Button href="/products" className="more-products btn-lg mx-auto">View More</Button>
     </div>

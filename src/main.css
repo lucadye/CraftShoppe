@@ -98,15 +98,11 @@ main > .container-fluid {
 /* Card */
 .card {
   width: 20rem!important;
-  min-height: 25rem;
   margin-bottom: 2.5rem;
 }
 
-.card-fluid {
-  min-height: 0;
-}
-
-.card h4 {
+.card h4,
+.card p {
   width: 100%;
 }
 
