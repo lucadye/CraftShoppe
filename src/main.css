@@ -1,0 +1,145 @@
+/* Reset */
+/*
+* { all: unset; }
+head { display: none; }
+*/
+
+
+
+/* Fonts */
+@import "fonts.css";
+* {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+header *, footer * {
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 900;
+  font-size: 2rem;
+  font-style: normal;
+}
+footer * {
+  font-size: 1rem;
+}
+
+
+
+/* Layout */
+
+main, header, footer {
+  display: block;
+  width: 100%;
+}
+
+main *, header *, footer * {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: normal;
+}
+
+
+
+/* Header */
+header {
+  z-index: 1;
+}
+h1 {
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 900!important;
+  font-style: normal;
+}
+header > nav {
+  padding: 0 auto;
+}
+header > nav > div {
+  max-width: 1200px;
+}
+
+
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+}
+.sneaky-link {
+  color: rgba(var(--bs-emphasis-color-rgb), 0.65);
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+footer hr {
+  margin: 1rem 0;
+  width: 25%;
+}
+footer > div {
+  width: 75%;
+  padding: 0 12.5%;
+}
+
+
+
+/* Content */
+main {
+  width: 1200px;
+  margin: 0 auto;
+}
+main > .container,
+main > .container-fluid {
+  margin-top: 2rem;
+}
+.false-header {
+  height: 5rem;
+  width: 100%;
+}
+
+
+
+/* Card */
+.card {
+  width: 20rem!important;
+  min-height: 25rem;
+  margin-bottom: 2.5rem;
+}
+
+.card-fluid {
+  min-height: 0;
+}
+
+.card h4 {
+  width: 100%;
+}
+
+.card.single-element {
+  border-color: transparent;
+}
+
+.more-products {
+  margin: auto;
+}
+
+
+
+/* The Rest */
+h2 {
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 900!important;
+  font-style: normal;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+hr {
+  margin: 4rem 0;
+  width: 100%;
+}
+
+p.lg {
+  font-size: larger;
+}
+p.x-lg {
+  font-size: x-large;
+}
+p.xx-lg {
+  font-size: xx-large;
+}

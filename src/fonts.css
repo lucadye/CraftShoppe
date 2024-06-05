@@ -1,0 +1,82 @@
+/* M PLUS Rounded 1c */
+@font-face {
+  src: url('../public/fonts/MPLUSRounded1c-Regular.ttf');
+  font-family: M-PLUS-Rounded-1c;
+}
+
+@font-face {
+  src: url('../public/fonts/MPLUSRounded1c-Medium.ttf');
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 500;
+}
+
+@font-face {
+  src: url('../public/fonts/MPLUSRounded1c-Bold.ttf');
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 700;
+}
+
+@font-face {
+  src: url('../public/fonts/MPLUSRounded1c-ExtraBold.ttf');
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 800;
+}
+
+@font-face {
+  src: url('../public/fonts/MPLUSRounded1c-Black.ttf');
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 900;
+}
+
+
+
+/* Roboto */
+
+@font-face {
+  src: url('../public/fonts/Roboto-Regular.ttf');
+  font-family: Roboto;
+}
+@font-face {
+  src: url('../public/fonts/Roboto-Italic.ttf');
+  font-family: Roboto;
+  font-style: italic;
+}
+
+
+@font-face {
+  src: url('../public/fonts/Roboto-Medium.ttf');
+  font-family: Roboto;
+  font-weight: 500;
+}
+@font-face {
+  src: url('../public/fonts/Roboto-MediumItalic.ttf');
+  font-family: Roboto;
+  font-weight: 500;
+  font-style: italic;
+}
+
+
+@font-face {
+  src: url('../public/fonts/Roboto-Bold.ttf');
+  font-family: Roboto;
+  font-weight: 700;
+}
+@font-face {
+  src: url('../public/fonts/Roboto-BoldItalic.ttf');
+  font-family: Roboto;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+@font-face {
+  src: url('../public/fonts/Roboto-Black.ttf');
+  font-family: Roboto;
+  font-weight: 900;
+}
+@font-face {
+  src: url('../public/fonts/Roboto-BlackItalic.ttf');
+  font-family: Roboto;
+  font-weight: 900;
+  font-style: italic;
+}
