@@ -60,9 +60,6 @@ header > nav > div {
 
 
 /* Footer */
-footer {
-  margin-top: 4rem;
-}
 .sneaky-link {
   color: rgba(var(--bs-emphasis-color-rgb), 0.65);
   margin-bottom: 1rem;
@@ -83,6 +80,7 @@ footer > div {
 main {
   width: 1200px;
   margin: 0 auto;
+  min-height: 702px;
 }
 main > .container,
 main > .container-fluid {
@@ -123,6 +121,21 @@ h2 {
   font-style: normal;
   width: 100%;
   margin-bottom: 2rem;
+}
+h3 {
+  font-family: M-PLUS-Rounded-1c;
+  font-weight: 900!important;
+  font-style: normal;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+a.plain {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 }
 
 hr {

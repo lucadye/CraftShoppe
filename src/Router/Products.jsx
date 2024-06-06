@@ -2,38 +2,37 @@ import { getAllProducts } from '../api/products';
 import { useState, useEffect } from 'react';
 
 import Card from '../Components/Card';
+import ProductButtons from '../Components/ProductButtons';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-
-function CartButton() {
-  return (
-    <Button
-      onClick={()=>alert('Added to cart!')}
-      >Add to Cart
-    </Button>
-  );
-}
-
 function Products() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(undefined);
 
   useEffect(() => {
     getAllProducts().then(r => setProducts(r));
   }, []);
 
+  if (products === undefined) {
+    return (<Container fluid className="d-flex justify-content-evenly flex-wrap">
+      <h2>Products</h2>
+      <Card placeholder />
+      <Card placeholder />
+      <Card placeholder />
+    </Container>);
+  }
+
   return (<Container fluid className="d-flex justify-content-evenly flex-wrap">
-    <h2>All Products</h2>
+    <h2>Products</h2>
     {products.map(p => {
       return (
         <Card title={p.name}
           src={p.images[0]}
-          button={CartButton}
-          >{p.description}
+          button={ProductButtons(p.id)}
+          >{p.description}<br/>{p.price}
         </Card>
       );
     })}
-    <hr/>
   </Container>);
 }
 

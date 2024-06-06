@@ -6,15 +6,7 @@ import Col from 'react-bootstrap/Col';
 
 import { useState, useEffect } from 'react';
 import { getProduct } from '../api/products';
-
-function CartButton() {
-  return (
-    <Button
-      onClick={()=>alert('Added to cart!')}
-      >Add to Cart
-    </Button>
-  );
-}
+import ProductButtons from '../Components/ProductButtons';
 
 function ProductCard({id}) {
   const [product, setProduct] = useState(undefined);
@@ -28,8 +20,8 @@ function ProductCard({id}) {
   ) : (
     <Card title={product.name}
       src={product.images[0]}
-      button={CartButton}
-      >{product.description}
+      button={ProductButtons(id)}
+      >{product.description}<br/>{product.price}
     </Card>
   );
 }
