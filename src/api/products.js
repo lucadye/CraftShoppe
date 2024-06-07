@@ -8,9 +8,9 @@ function formatMoney(num) {
 }
 
 async function getProduct(id) {
-  const product = await api('/products/' + id);
+  const product = await api.GET('/products/' + id);
   product.price = formatMoney(product.price);
-  const images = await api('/images/' + product.id);
+  const images = await api.GET('/images/' + product.id);
   product.images = images.map(img => {
     return process.env.REACT_APP_API_URL + img.path;
   })
@@ -18,10 +18,10 @@ async function getProduct(id) {
 }
 
 async function getAllProducts() {
-  const products = await api('/products');
+  const products = await api.GET('/products');
   for (let p of products) {
     p.price = formatMoney(p.price);
-    const images = await api('/images/' + p.id);
+    const images = await api.GET('/images/' + p.id);
     p.images = images.map(img => {
       return process.env.REACT_APP_API_URL + img.path;
     })

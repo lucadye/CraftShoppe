@@ -27,7 +27,7 @@ function ProductCard({id}) {
 }
 
 function FeaturedProducts() {
-  return (<Container fluid className="d-flex justify-content-between flex-wrap">
+  return (<Container fluid className="d-flex justify-content-evenly flex-wrap">
     <h2>Featured Products</h2>
     <ProductCard id="1"/>
     <div className="d-flex justify-content-center" style={{width: '100%'}}>
@@ -52,7 +52,7 @@ function About() {
         </p></Col>
       </Row>
       <Row>
-        <Col sm style={{width: '50%', margin: '0 25%'}}>
+        <Col>
           <hr/>
           <p className="x-lg text-center" style={{width: '100%'}}>
             Join us on this colorful journey, and let's make something beautiful together!
