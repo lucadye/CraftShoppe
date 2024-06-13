@@ -1,15 +1,10 @@
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-
-function NavButton({href, children}) {
-  return (<Nav.Link href={href}>
-    <Button variant="outline-dark">
-      {children}
-    </Button>
-  </Nav.Link>);
-}
+import NavButton from '../Components/NavButton';
 
 function Header() {
   return (<header className="position-fixed top-0 start-0">
@@ -22,8 +17,8 @@ function Header() {
           <Nav>
             <NavButton href="/">Home</NavButton>
             <NavButton href="/products">Products</NavButton>
-            <NavButton href="/#about">About</NavButton>
-            <NavButton href="/#contact">Contact</NavButton>
+            <NavButton href="/about">About</NavButton>
+            <NavButton href="/contact">Contact</NavButton>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -14,16 +14,16 @@ head { display: none; }
   font-style: normal;
   font-size: 16px;
 }
-@media (max-width: 550px) {
-  * {
-    font-size: 32px;
-  }
-}
 header *, footer * {
   font-family: M-PLUS-Rounded-1c;
   font-weight: 900;
   font-size: 2rem;
   font-style: normal;
+}
+@media (max-width: 550px) {
+  header *, footer * {
+    font-size: 1.5rem;
+  }
 }
 footer * {
   font-size: 1rem;
@@ -88,7 +88,7 @@ footer > div {
 
 /* Content */
 main {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
   min-height: 702px;
 }
@@ -118,8 +118,24 @@ main > .container-fluid {
   border-color: transparent;
 }
 
-.more-products {
-  margin: auto;
+.card.contact {
+  margin-bottom: 0;
+}
+
+
+
+/* About Page */
+img.about {
+  width: 32rem;
+  height: 24rem;
+}
+@media (max-width: 550px) {
+  .d-flex.flip-on-mobile {
+    flex-direction: column-reverse!important;
+  }
+  img.about {
+    margin: 2rem 0;
+  }
 }
 
 
@@ -153,12 +169,15 @@ hr {
   width: 100%;
 }
 
-p.lg {
+p.lg,
+b.lg {
   font-size: 1.5rem;
 }
-p.x-lg {
+p.x-lg,
+b.x-lg {
   font-size: 2rem;
 }
-p.xx-lg {
+p.xx-lg,
+b.xx-lg {
   font-size: 2.5rem;
 }

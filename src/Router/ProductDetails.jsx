@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProduct } from '../api/products';
 import { AddToCartButton } from '../Components/ProductButtons';
+import Form from 'react-bootstrap/Form';
 
 function CommonPageData({children}) {
   return (
@@ -24,6 +25,8 @@ function CommonPageData({children}) {
 function ProductDetails() {
   let { productId } = useParams();
   const [product, setProduct] = useState(undefined);
+  const [optionId, setOptionId] = useState(undefined);
+
   useEffect(() => {
     getProduct(productId).then(r => setProduct(r));
   }, []);
@@ -55,6 +58,14 @@ function ProductDetails() {
     );
   }
 
+  function onSubmit(e) {
+    e.preventDefault();
+  }
+
+  function onChange(e) {
+    setOptionId(e.target.value);
+  }
+
   return (
     <CommonPageData>
       <Col md={6}>
@@ -80,7 +91,18 @@ function ProductDetails() {
             <br/>
             {product.price}
           </p>
-          <AddToCartButton style={{marginTop: 'auto'}} id={productId} />
+          <Form style={{marginTop: 'auto'}} onSubmit={onSubmit}>
+            <Form.Group style={{marginRight: '1rem'}}>
+              <Form.Label>Product Options</Form.Label>
+              <Form.Select aria-label="Product Options" onChange={onChange}>
+                <option selected="true" disabled>Select an option</option>
+                {product.options.map(({name, priceMod}, index) => {
+                  return (<option value={index}>{name} {priceMod ? `[${priceMod}]` : ''}</option>);
+                })}
+              </Form.Select>
+            </Form.Group>
+            <AddToCartButton disabled={optionId === undefined} id={productId} />
+          </Form>
         </div>
       </Col>
     </CommonPageData>

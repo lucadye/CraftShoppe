@@ -4,7 +4,8 @@ async function api(endpoint, method, body) {
     process.env.REACT_APP_API_URL + endpoint,
     { method, body }
   );
-  return await results.json();
+  if (results.ok) return await results.json();
+  else return results;
 }
 
 api.GET    = async (endpoint      ) => await api(endpoint, 'GET'         );

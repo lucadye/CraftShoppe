@@ -12,11 +12,12 @@ function DetailsButton({id}) {
   );
 }
 
-function AddToCartButton({id, style}) {
+function AddToCartButton({id, style, disabled}) {
   return (
     <Button
+      disabled={disabled}
+      type="submit"
       style={style}
-      onClick={()=>alert(`Added product with id ${id} to cart!`)}
       >Add to Cart
     </Button>
   );
