@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
-function NavButton({href, children}) {
+function NavButton({href, solid, children}) {
   const [state, setState] = useState();
   const className = ({ isActive, isPending }) => {
     let newState = isPending ? 'pending' : isActive ? 'active' : '';
@@ -12,9 +12,15 @@ function NavButton({href, children}) {
   }
   return (<Nav.Link href={href}>
     <NavLink to={href} className={className}>
-      <Button variant={state === 'active' ? 'dark' : 'outline-dark'}>
-        {children}
-      </Button>
+      {solid ? (
+        <Button variant={state === 'active' ? 'primary' : 'dark'}>
+          {children}
+        </Button>
+      ) : (
+        <Button variant={state === 'active' ? 'outline-primary' : 'outline-dark'}>
+          {children}
+        </Button>
+      )}
     </NavLink>
   </Nav.Link>);
 }

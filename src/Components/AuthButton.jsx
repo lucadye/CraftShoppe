@@ -6,7 +6,7 @@ function AuthButton() {
     <NavButton href="/logout">Logout</NavButton>
   ) : (<>
     <NavButton href="/login">Login</NavButton>
-    <NavButton href="/sign-up">Sign Up</NavButton>
+    <NavButton solid href="/sign-up">Sign Up</NavButton>
   </>);
 }
 

@@ -14,7 +14,7 @@ head { display: none; }
   font-style: normal;
   font-size: 16px;
 }
-header *, footer * {
+header h1, footer * {
   font-family: M-PLUS-Rounded-1c;
   font-weight: 900;
   font-size: 2rem;
@@ -65,6 +65,19 @@ header > nav {
 }
 header > nav > div {
   max-width: 1200px;
+}
+header .navbar-nav {
+  align-items: center;
+}
+header a.text-link {
+  height: fit-content;
+  margin: 0 0.5rem;
+}
+header a.text-link.active {
+  color: blue !important;
+}
+header a.text-link:hover {
+  text-decoration: underline;
 }
 
 

@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+import NavLink from '../Components/NavLink';
 import NavButton from '../Components/NavButton';
 import AuthButton from '../Components/AuthButton';
 
@@ -16,10 +17,10 @@ function Header() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <div className="me-auto"></div>
           <Nav>
-            <NavButton href="/">Home</NavButton>
-            <NavButton href="/products">Products</NavButton>
-            <NavButton href="/about">About</NavButton>
-            <NavButton href="/contact">Contact</NavButton>
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/products">Products</NavLink>
+            <NavLink href="/about">About</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
             <AuthButton/>
           </Nav>
         </Navbar.Collapse>
