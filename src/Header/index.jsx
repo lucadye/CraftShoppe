@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavButton from '../Components/NavButton';
+import AuthButton from '../Components/AuthButton';
 
 function Header() {
   return (<header className="position-fixed top-0 start-0">
@@ -19,6 +20,7 @@ function Header() {
             <NavButton href="/products">Products</NavButton>
             <NavButton href="/about">About</NavButton>
             <NavButton href="/contact">Contact</NavButton>
+            <AuthButton/>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -92,6 +92,14 @@ main {
   margin: 0 auto;
   min-height: 702px;
 }
+@media (max-height: 50rem) {
+  main {
+    min-height: 0;
+  }
+  footer {
+    marginTop: 4rem;
+  }
+}
 main > .container,
 main > .container-fluid {
   margin-top: 2rem;
