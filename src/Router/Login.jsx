@@ -1,12 +1,14 @@
-import { signIn } from '../api/auth';
 import { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setUserData } from '../store/userSlice';
+import { signIn } from '../api/auth';
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link, Navigate } from 'react-router-dom';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { setUserData } from '../store/userSlice';
+import Alert from 'react-bootstrap/Alert';
 
 function Login() {
   const user = useSelector((state) => state.user);
@@ -16,13 +18,19 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [failed, setFailed] = useState(false);
   
   if (user.signedIn) return <Navigate to="/"/>;
 
   async function onSubmit(e) {
     e.preventDefault();
     const results = await signIn(email, password);
-    console.log(results);
+    if (results.status === 401) {
+      setEmail('');
+      setPassword('');
+      return setFailed(true);
+    };
     setUser({
       ...results,
       signedIn: true,
@@ -42,6 +50,13 @@ function Login() {
   return (
       <Container fluid>
       <h2 id="contact">Login</h2>
+      {failed ? (
+        <Container fluid className="d-flex justify-content-center">
+          <Alert variant="light" style={{textAlign: 'center'}}>
+            Incorrect username or password.<br/>Please try again.
+          </Alert>
+        </Container>
+      ) : ''}
       <Form className="d-flex flex-column mx-auto" style={{marginTop: 'auto', maxWidth: "32rem"}} onSubmit={onSubmit}>
 
         <Form.Group
@@ -54,6 +69,7 @@ function Login() {
             placeholder="Enter Email"
             aria-label="Email address"
             onChange={onEmailChange}
+            value={email}
           />
           <Form.Text 
             className="text-muted">
@@ -71,6 +87,7 @@ function Login() {
             placeholder="Enter Password"
             aria-label="Password"
             onChange={onPasswordChange}
+            value={password}
           />
         </Form.Group>
 
