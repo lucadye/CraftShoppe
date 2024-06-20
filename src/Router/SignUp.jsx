@@ -78,7 +78,7 @@ function SignUp() {
           style={{marginTop: '2rem'}}
           disabled={!email || !password}
           type="submit"
-          >Login
+          >Sign Up
         </Button>
         
         <p className="text-muted"

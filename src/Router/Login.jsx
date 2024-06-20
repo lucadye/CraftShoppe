@@ -52,7 +52,7 @@ function Login() {
       <h2 id="contact">Login</h2>
       {failed ? (
         <Container fluid className="d-flex justify-content-center">
-          <Alert variant="light" style={{textAlign: 'center'}}>
+          <Alert dismissible variant="light" style={{textAlign: 'center'}}>
             Incorrect username or password.<br/>Please try again.
           </Alert>
         </Container>
