@@ -1,14 +1,15 @@
+import { useState, useEffect } from 'react';
+import { getProduct } from '../api/products';
+import { addToCart } from '../api/cart';
+
+import { useParams, Link } from 'react-router-dom';
+import { AddToCartButton } from '../Components/ProductButtons';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import Placeholder from 'react-bootstrap/Placeholder';
 import Carousel from 'react-bootstrap/Carousel';
-
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getProduct } from '../api/products';
-import { AddToCartButton } from '../Components/ProductButtons';
 import Form from 'react-bootstrap/Form';
 
 function CommonPageData({children}) {
@@ -59,6 +60,11 @@ function ProductDetails() {
   }
 
   function onSubmit(e) {
+    addToCart({
+      id: Number(productId),
+      option_index: Number(optionId),
+      count: 1,
+    });
     e.preventDefault();
   }
 
@@ -80,7 +86,7 @@ function ProductDetails() {
             })}
           </Carousel>
         ) : product.images.length === 1 ? (
-          <img src={product.images[0]} />
+          <img style={{width: '100%'}} src={product.images[0]} />
         ) : ''}
       </Col>
       <Col md>
@@ -92,12 +98,12 @@ function ProductDetails() {
             {product.price}
           </p>
           <Form style={{marginTop: 'auto'}} onSubmit={onSubmit}>
-            <Form.Group style={{marginRight: '1rem'}}>
+            <Form.Group style={{margin: '0 1rem 1rem 0'}}>
               <Form.Label>Product Options</Form.Label>
-              <Form.Select aria-label="Product Options" onChange={onChange}>
-                <option selected="true" disabled>Select an option</option>
+              <Form.Select defaultValue="0" aria-label="Product Options" onChange={onChange}>
+                <option value="0" disabled>Select an option</option>
                 {product.options.map(({name, priceMod}, index) => {
-                  return (<option value={index}>{name} {priceMod ? `[${priceMod}]` : ''}</option>);
+                  return (<option key={index + 1} value={index + 1}>{name} {priceMod ? `[${priceMod}]` : ''}</option>);
                 })}
               </Form.Select>
             </Form.Group>

@@ -1,23 +1,19 @@
 import api from './index';
-
-function formatMoney(num) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(num);
-}
+import { formatMoney } from '../helpers'
 
 async function getProduct(id) {
   const product = await api.GET('/products/' + id);
   product.price = formatMoney(product.price);
   product.options = await api.GET('/products/' + id + '/options');
   product.options = product.options.map(o => {
+    const price_mod = o.price_mod;
     if (o.price_mod > 0) o.price_mod = '+' + formatMoney(o.price_mod);
     else if (o.price_mod < 0) o.price_mod = '-' + formatMoney(o.price_mod);
     else o.price_mod = '';
     return {
       name: o.name,
-      priceMod: o.price_mod
+      priceMod: o.price_mod,
+      price_mod,
     };
   });
   const images = await api.GET('/images/' + product.id);

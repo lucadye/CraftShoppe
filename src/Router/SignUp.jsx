@@ -7,6 +7,7 @@ import { Link, Navigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../store/userSlice';
+import { validEmail, validPassword } from '../helpers';
 
 function SignUp() {
   const user = useSelector((state) => state.user);
@@ -39,10 +40,13 @@ function SignUp() {
     setPassword(e.target.value);
   }
 
+  const emailIsValid = validEmail(email);
+  const passwordIsValid = validPassword(password);
+
   return (
       <Container fluid>
-      <h2 id="contact">Sign Up</h2>
-      <Form className="d-flex flex-column mx-auto" style={{marginTop: 'auto', maxWidth: "32rem"}} onSubmit={onSubmit}>
+      <h2>Sign Up</h2>
+      <Form noValidate className="d-flex flex-column mx-auto" style={{marginTop: 'auto', maxWidth: "32rem"}} onSubmit={onSubmit}>
 
         <Form.Group
           style={{marginTop: '2rem'}}>
@@ -54,6 +58,8 @@ function SignUp() {
             placeholder="Enter Email"
             aria-label="Email address"
             onChange={onEmailChange}
+            isValid={emailIsValid}
+            isInvalid={!emailIsValid && email !== ''}
           />
           <Form.Text 
             className="text-muted">
@@ -71,6 +77,8 @@ function SignUp() {
             placeholder="Enter Password"
             aria-label="Password"
             onChange={onPasswordChange}
+            isValid={passwordIsValid}
+            isInvalid={!passwordIsValid && password !== ''}
           />
         </Form.Group>
 

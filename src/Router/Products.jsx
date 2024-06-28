@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Card from '../Components/Card';
 import ProductButtons from '../Components/ProductButtons';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 
 function Products() {
   const [products, setProducts] = useState(undefined);
@@ -24,9 +23,9 @@ function Products() {
 
   return (<Container fluid className="d-flex justify-content-evenly flex-wrap">
     <h2>Products</h2>
-    {products.map(p => {
+    {products.map((p, i) => {
       return (
-        <Card title={p.name}
+        <Card key={i} title={p.name}
           src={p.images[0]}
           button={ProductButtons(p.id)}
           >{p.description}<br/>{p.price}

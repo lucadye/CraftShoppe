@@ -5,7 +5,10 @@ async function api(endpoint, method, body, headers) {
     {
       method,
       body,
-      headers,
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers,
+      },
       credentials: 'include',
     }
   );

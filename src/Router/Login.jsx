@@ -49,7 +49,7 @@ function Login() {
 
   return (
       <Container fluid>
-      <h2 id="contact">Login</h2>
+      <h2>Login</h2>
       {failed ? (
         <Container fluid className="d-flex justify-content-center">
           <Alert dismissible variant="light" style={{textAlign: 'center'}}>

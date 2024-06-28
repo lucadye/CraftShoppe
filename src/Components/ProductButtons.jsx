@@ -31,7 +31,6 @@ export {
 function ProductButtons(id) {
   return () => (<Container className="d-flex justify-content-left gap-4">
     <DetailsButton id={id} />
-    <AddToCartButton id={id} />
   </Container>);
 }
 

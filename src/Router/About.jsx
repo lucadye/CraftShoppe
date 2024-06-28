@@ -25,7 +25,7 @@ function About() {
           <p className="x-lg text-center" style={{width: '100%'}}>
             Join us on this colorful journey, and let's make something beautiful together!
           </p>
-          <b className="xx-lg text-center" style={{width: '100%'}}>
+          <b className="xx-lg text-center d-block" style={{width: '100%'}}>
             Happy crafting!
           </b>
         </Col>

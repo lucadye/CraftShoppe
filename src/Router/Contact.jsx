@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 
 function Contact() {
   return (<Container fluid>
-    <h2 id="contact">Contact Us</h2>
+    <h2>Contact Us</h2>
     <p style={{maxWidth: '40rem', marginBottom: '2rem'}}>
       <b className="lg">Have something to say?</b><br/>
       We'd love to hear from you! Whether you have a question about our products, want to discuss a custom commission, or need assistance with an order, we're here to help!

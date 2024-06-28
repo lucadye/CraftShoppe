@@ -16,6 +16,10 @@ const persistConfig = {
  
 const persistedReducer = persistReducer(persistConfig, reducers)
 
-export default configureStore({
+const store = configureStore({
   reducer: persistedReducer,
-})
+});
+
+export default store;
+
+export const getState = store.getState;

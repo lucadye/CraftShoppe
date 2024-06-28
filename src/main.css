@@ -43,12 +43,6 @@ main, header, footer {
   width: 100%;
 }
 
-main *, header *, footer * {
-  display: inline-block;
-  max-width: 100%;
-  overflow-wrap: normal;
-}
-
 
 
 /* Header */
