@@ -16,10 +16,7 @@ async function getProduct(id) {
       price_mod,
     };
   });
-  const images = await api.GET('/images/' + product.id);
-  product.images = images.map(img => {
-    return process.env.REACT_APP_API_URL + img.path;
-  })
+  product.images = await getProductImages(product.id);
   return product;
 }
 
@@ -27,15 +24,20 @@ async function getAllProducts() {
   const products = await api.GET('/products');
   for (let p of products) {
     p.price = formatMoney(p.price);
-    const images = await api.GET('/images/' + p.id);
-    p.images = images.map(img => {
-      return process.env.REACT_APP_API_URL + img.path;
-    })
+    p.images = await getProductImages(p.id)
   }
   return products;
+}
+
+async function getProductImages(id) {
+  const images = await api.GET('/images/' + id);
+  return images.map(img => {
+    return process.env.REACT_APP_API_URL + img.path;
+  })
 }
 
 export {
   getProduct,
   getAllProducts,
+  getProductImages,
 };

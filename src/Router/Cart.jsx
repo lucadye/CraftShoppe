@@ -1,31 +1,131 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getCart } from '../api/cart';
-import { formatMoney } from '../helpers';
+import { getCart, updateCart } from '../api/cart';
+import { formatNumber, formatMoney } from '../helpers';
 
 import { Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
 import Spinner from 'react-bootstrap/Spinner';
+import Card from '../Components/Card';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-function formatOption({name, priceMod, ...rest}) {
-  let str = name;
-  if (priceMod) str += ` [${priceMod}]`;
-  return str
+function Counter({amount, setAmount, productData: p}) {
+  function changeAmount(value) {
+    value = formatNumber(value);
+    if (value === '') return setAmount('');
+    value = value < 1 ? 1 : value;
+    value = value > 999 ? 999 : value;
+    setAmount(value);
+    updateCart({
+      id: Number(p.id),
+      option_index: Number(p.option.id),
+      count: value,
+    });
+  }
+  return (
+    <ButtonGroup aria-label="Product Amount">
+  
+      <Button
+        variant="outline-secondary"
+        onClick={e => {
+          e.preventDefault();
+          changeAmount(amount - 1);
+        }}
+        >-
+      </Button>
+  
+      <Button variant="outline-secondary">
+        <Form.Control
+          defaultValue="1"
+          aria-label="Product Amount"
+          onChange={e => {
+            e.preventDefault();
+            changeAmount(e.target.value);
+          }}
+          style={{width: `calc(2rem + ${String(amount).length}ch)`}}
+          value={amount}
+        />
+      </Button>
+  
+      <Button
+        variant="outline-secondary"
+        onClick={e => {
+          e.preventDefault();
+          changeAmount(amount + 1);
+        }}
+        >+
+      </Button>
+  
+    </ButtonGroup>
+  );
+}
+
+function CartItem({data: p, setCart}) {
+  const [amount, setAmount] = useState(p.count);
+  const Btn = () => (<Container fluid className="d-flex justify-content-between" style={{padding: '0'}}>
+    <Counter amount={amount} setAmount={setAmount} productData={p}/>
+    <Button
+      variant="outline-secondary"
+      onClick={e => {
+        e.preventDefault();
+        updateCart({
+          id: Number(p.id),
+          option_index: Number(p.option.id),
+          count: 0,
+        }).then(() => {
+          getCart().then(c => {
+            setCart(c);
+          });
+        });
+      }}
+      >x
+    </Button>
+  </Container>);
+  return (
+    <Card
+      title={`${p.name} (${p.option.name})`}
+      src={p.image}
+      button={Btn}
+    >
+      <Link to={'/products/' + p.id}>View product details</Link>
+      <br/>
+      Price: {formatMoney(p.price + p.option.price_mod)}
+      <br/>
+      Subtotal: {formatMoney((Number(p.price) + Number(p.option.price_mod)) * Number(amount))}
+    </Card>
+  );
 }
 
 function Cart() {
   const signedIn = useSelector(state => state.user.signedIn);
 
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState(undefined);
   useEffect(() => {
   	if (!signedIn) return;
-    getCart().then(c => setCart(c));
+    getCart().then(c => {
+      setCart(c);
+    });
   }, [signedIn]);
 
   if (!signedIn) return <Navigate to="/login"/>;
 
-  if (cart === null || cart === undefined) {
+  if (cart === null) {
+    return (
+      <Container fluid className="d-flex flex-column align-items-center" style={{paddingTop: '8rem', margin: '0'}}>
+        <p className="x-lg">
+          Your cart is empty!
+        </p>
+        <p className="lg">
+          If you add a product, it will show up here.
+        </p>
+        <Link to="/products"><Button size="lg">View all products</Button></Link>
+      </Container>
+    );
+  }
+
+  if (cart === undefined) {
     return (
       <Container fluid>
         <h2>Cart</h2>
@@ -39,41 +139,33 @@ function Cart() {
     );
   }
 
-  let total = 0;
+  let totalPrice = 0;
+  let totalCount = 0;
 
   return (
     <Container fluid>
       <h2>Cart</h2>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Option</th>
-            <th>#</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Container fluid className="d-flex gap-4">
           {cart.map((p, i) => {
-            total += (Number(p.price) + Number(p.option.price_mod)) * Number(p.count);
-            return (
-              <tr key={i}>
-                <td><Link to={'/products/' + p.id}>{p.name}</Link></td>
-                <td>{formatMoney(p.price)}</td>
-                <td>{formatOption(p.option)}</td>
-                <td>{p.count}</td>
-                <td>{formatMoney((Number(p.price) + Number(p.option.price_mod)) * Number(p.count))}</td>
-              </tr>
-            );
+            totalPrice += (Number(p.price) + Number(p.option.price_mod)) * Number(p.count);
+            totalCount += p.count;
+            return <CartItem key={i} data={p} setCart={setCart}/>
           })}
-          <tr>
-            <td colspan="3"></td>
-            <td>Total:</td>
-            <td>{formatMoney(total)}</td>
-          </tr>
-        </tbody>
-      </Table>
+          <Card
+            style={{height: 'fit-content', alignSelf: 'end'}}
+            title="Total"
+            button={()=>(
+              <Button>
+                Proceed to checkout
+              </Button>
+            )}
+          ><p>
+            Price: {formatMoney(totalPrice)}
+            <br/>
+            Item Count: {totalCount}
+          </p>
+          </Card>
+      </Container>
     </Container>
   );
 }

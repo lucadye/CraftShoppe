@@ -30,3 +30,28 @@ export function formatMoney(num) {
     currency: 'USD',
   }).format(num);
 }
+
+export function formatNumber(str) {
+  if (typeof str === 'number') return str;
+  if (str === '') return str;
+  const isNum = n => '1234567890'.includes(n);
+  const isValid = (n, char) => {
+    if (typeof char !== 'string') return isNum(n) ? n : '';
+    else return (isNum(n) || n === char) ? n : '';
+  };
+  let arr = str.split('');
+  let seenNumber = false;
+  let foundDecimal = false;
+  arr = arr.map(c => {
+    if (seenNumber && !foundDecimal) {
+      if (c === '.') foundDecimal = true;
+      return isValid(c, '.');
+    } else {
+      if (isNum(c)) seenNumber = true;
+      return isValid(c);
+    }
+  });
+  str = arr.join('');
+  if (str === '') return str;
+  return Number(str);
+}

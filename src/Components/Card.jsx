@@ -3,10 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Placeholder from 'react-bootstrap/Placeholder';
 import Spinner from 'react-bootstrap/Spinner';
 
-function Card({title, src: imgSrc, children, button: Btn, singleElement, contact, placeholder}) {
+function Card({title, src: imgSrc, children, button: Btn, singleElement, contact, placeholder, ...props}) {
   if (placeholder) {
     return (
-      <BCard className={contact ? 'mx-auto contact' : ''}>
+      <BCard className={contact ? 'mx-auto contact' : ''} {...props}>
         <BCard.Body>
           <Container fluid className="border rounded d-flex justify-content-center align-items-center" style={{height: "12rem"}}>
             <Spinner variant="secondary" animation="border" role="status">
@@ -30,13 +30,13 @@ function Card({title, src: imgSrc, children, button: Btn, singleElement, contact
   }
   if (singleElement) {
     return (
-      <BCard className="justify-content-center single-element">
+      <BCard className="justify-content-center single-element" {...props}>
         {children}
       </BCard>
     );
   }
   return (
-    <BCard className={contact ? 'mx-auto contact' : ''}>
+    <BCard className={contact ? 'mx-auto contact' : ''} {...props}>
       {imgSrc ? <BCard.Img variant="top" src={imgSrc} alt={title}/> : ''}
       <BCard.Body>
         {title ? <BCard.Title as='h4'>{title}</BCard.Title> : ''}
