@@ -1,7 +1,7 @@
 import api from './index';
 import { formatMoney } from '../helpers'
 
-async function getProduct(id) {
+export async function getProduct(id) {
   const product = await api.GET('/products/' + id);
   product.price = formatMoney(product.price);
   product.options = await api.GET('/products/' + id + '/options');
@@ -20,7 +20,7 @@ async function getProduct(id) {
   return product;
 }
 
-async function getAllProducts() {
+export async function getAllProducts() {
   const products = await api.GET('/products');
   for (let p of products) {
     p.price = formatMoney(p.price);
@@ -29,15 +29,17 @@ async function getAllProducts() {
   return products;
 }
 
-async function getProductImages(id) {
+export async function getProductImages(id) {
   const images = await api.GET('/images/' + id);
   return images.map(img => {
     return process.env.REACT_APP_API_URL + img.path;
   })
 }
 
-export {
-  getProduct,
-  getAllProducts,
-  getProductImages,
-};
+export async function getProductList(id) {
+  return await api.GET('/product-lists/' + id);
+}
+
+export async function patchProductList(id, list) {
+  return await api.PATCH('/product-lists/' + id, {products: list});
+}

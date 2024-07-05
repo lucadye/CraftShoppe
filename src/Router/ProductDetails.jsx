@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getProduct } from '../api/products';
 import { addToCart } from '../api/cart';
 import { formatNumber } from '../helpers';
+import { useSelector } from 'react-redux';
 
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { AddToCartButton } from '../Components/ProductButtons';
@@ -20,12 +21,9 @@ import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import Placeholder from 'react-bootstrap/Placeholder';
 
-function CommonPageData({children, showAlert, setShowAlert, amount}) {
-  const [redirectUrl, setRedirectUrl] = useState('');
+function CommonPageData({children, showAlert, setShowAlert, amount, setRedirectUrl}) {
   return (
     <Container fluid>
-
-    {redirectUrl ? <Navigate to={redirectUrl}/> : ''}
 
     {showAlert ? (
       <div
@@ -70,15 +68,21 @@ function CommonPageData({children, showAlert, setShowAlert, amount}) {
 }
 
 function ProductDetails() {
+  const signedIn = useSelector(state => state.user.signedIn);
+  const [redirectUrl, setRedirectUrl] = useState('');
+
   let { productId } = useParams();
   const [product, setProduct] = useState(undefined);
   const [optionId, setOptionId] = useState(undefined);
   const [amount, setAmount] = useState(1);
+
   const [showAlert, setShowAlert] = useState('');
 
   useEffect(() => {
     getProduct(productId).then(r => setProduct(r));
   }, []);
+
+  if (redirectUrl) return <Navigate to={redirectUrl}/>;
 
   if (product === undefined) {
     return (
@@ -109,6 +113,7 @@ function ProductDetails() {
 
   function onSubmit(e) {
     e.preventDefault();
+    if (!signedIn) return setRedirectUrl('/login');
     addToCart({
       id: Number(productId),
       option_index: Number(optionId),

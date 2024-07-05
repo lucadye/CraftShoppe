@@ -1,16 +1,11 @@
 import api from './index';
 import { getState } from '../store';
 import { formatMoney } from '../helpers'
-import { getProductImages } from './products';
-
-
-async function getProductList(id) {
-  return await api.GET('/product-lists/' + id);
-}
-
-async function patchProductList(id, list) {
-  return await api.PATCH('/product-lists/' + id, {products: list});
-}
+import {
+  getProductImages,
+  getProductList,
+  patchProductList
+} from './products';
 
 export async function getCart() {
   const {cart_id} = getState().user;

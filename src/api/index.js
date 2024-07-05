@@ -1,10 +1,9 @@
 async function api(endpoint, method, body, headers) {
-  body = JSON.stringify(body);
   const results = await fetch(
     process.env.REACT_APP_API_URL + endpoint,
     {
       method,
-      body,
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         ...headers,

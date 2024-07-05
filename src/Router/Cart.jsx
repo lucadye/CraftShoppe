@@ -62,10 +62,10 @@ function Counter({amount, setAmount, productData: p}) {
   );
 }
 
-function CartItem({data: p, setCart}) {
+function CartItem({data: p, setCart, forceReload, key}) {
   const [amount, setAmount] = useState(p.count);
   const Btn = () => (<Container fluid className="d-flex justify-content-between" style={{padding: '0'}}>
-    <Counter amount={amount} setAmount={setAmount} productData={p}/>
+    <Counter amount={amount} setAmount={n=>{setAmount(n); forceReload()}} productData={p}/>
     <Button
       variant="outline-secondary"
       onClick={e => {
@@ -85,6 +85,7 @@ function CartItem({data: p, setCart}) {
   </Container>);
   return (
     <Card
+      key={key}
       title={`${p.name} (${p.option.name})`}
       src={p.image}
       button={Btn}
@@ -99,17 +100,15 @@ function CartItem({data: p, setCart}) {
 }
 
 function Cart() {
-  const signedIn = useSelector(state => state.user.signedIn);
+  const [reloadValue, setReloadValue] = useState(0);
+  const forceReload = () => setReloadValue(reloadValue + 1);
 
   const [cart, setCart] = useState(undefined);
   useEffect(() => {
-  	if (!signedIn) return;
     getCart().then(c => {
       setCart(c);
     });
-  }, [signedIn]);
-
-  if (!signedIn) return <Navigate to="/login"/>;
+  }, [reloadValue]);
 
   if (cart === null) {
     return (
@@ -145,19 +144,19 @@ function Cart() {
   return (
     <Container fluid>
       <h2>Cart</h2>
-      <Container fluid className="d-flex gap-4">
+      <Container fluid className="d-flex justify-content-evenly gap-4 flex-wrap">
           {cart.map((p, i) => {
             totalPrice += (Number(p.price) + Number(p.option.price_mod)) * Number(p.count);
             totalCount += p.count;
-            return <CartItem key={i} data={p} setCart={setCart}/>
+            return <CartItem key={i} data={p} setCart={setCart} forceReload={forceReload}/>
           })}
           <Card
             style={{height: 'fit-content', alignSelf: 'end'}}
             title="Total"
             button={()=>(
-              <Button>
+              <Link to="/checkout"><Button>
                 Proceed to checkout
-              </Button>
+              </Button></Link>
             )}
           ><p>
             Price: {formatMoney(totalPrice)}

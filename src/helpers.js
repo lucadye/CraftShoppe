@@ -55,3 +55,15 @@ export function formatNumber(str) {
   if (str === '') return str;
   return Number(str);
 }
+
+export function formatDate(str) {
+  const datetime = new Date(str);
+  const year = datetime.getFullYear();
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const month = monthNames[datetime.getMonth()];
+  const day = datetime.getDate();
+  return `${year} ${month} ${day}`;
+}
