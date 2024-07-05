@@ -18,9 +18,9 @@
     "serve": "^14.2.3"
   },
   "scripts": {
-    "deploy": "npm i && npm build && npx serve build",
+    "deploy": "npx serve build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm i && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
