@@ -80,7 +80,7 @@ function ProductDetails() {
 
   useEffect(() => {
     getProduct(productId).then(r => setProduct(r));
-  }, []);
+  }, [productId]);
 
   if (redirectUrl) return <Navigate to={redirectUrl}/>;
 
@@ -146,13 +146,13 @@ function ProductDetails() {
             {product.images.map((src, key) => {
               return (
                 <Carousel.Item key={key}>
-                  <img src={src} />
+                  <img src={src} alt={product.name}/>
                 </Carousel.Item>
               );
             })}
           </Carousel>
         ) : product.images.length === 1 ? (
-          <img style={{width: '100%'}} src={product.images[0]} />
+          <img style={{width: '100%'}} src={product.images[0]} alt={product.name}/>
         ) : ''}
       </Col>
       <Col md>

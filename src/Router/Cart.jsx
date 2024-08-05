@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Navigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getCart, updateCart } from '../api/cart';
 import { formatNumber, formatMoney } from '../helpers';
 

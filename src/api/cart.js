@@ -1,4 +1,3 @@
-import api from './index';
 import { getState } from '../store';
 import { formatMoney } from '../helpers'
 import {

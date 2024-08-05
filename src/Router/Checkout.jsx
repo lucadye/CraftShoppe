@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { formatMoney } from '../helpers';
 import { getOrders } from '../api/orders';
 
 function Checkout() {
@@ -7,7 +6,7 @@ function Checkout() {
   useEffect(() => {
     if (orders !== null) return;
     getOrders().then(r => setOrders(r));
-  }, []);
+  }, [orders]);
 
   return (
     <h2>Order History</h2>

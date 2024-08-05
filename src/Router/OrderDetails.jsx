@@ -13,7 +13,7 @@ function Orders() {
   useEffect(() => {
     if (order !== null) return;
     getOrder(orderId).then(r => setOrder(r));
-  }, []);
+  }, [orderId, order]);
 
   if (order === null) return (<Container Fluid>
     <Link className="plain" to="/orders">{"< Back to Order History"}</Link>

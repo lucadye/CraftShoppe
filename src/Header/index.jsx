@@ -1,11 +1,8 @@
-import { useState } from 'react'
-
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import NavLink from '../Components/NavLink';
-import NavButton from '../Components/NavButton';
 import AuthButton from '../Components/AuthButton';
 
 function Header() {

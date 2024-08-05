@@ -12,7 +12,7 @@ function Orders() {
   useEffect(() => {
     if (orders !== null) return;
     getOrders().then(r => setOrders(r));
-  }, []);
+  }, [orders]);
 
   if (orders === null) return (<Container fluid>
     <h2>Order History</h2>
