@@ -11,7 +11,7 @@ async function api(endpoint, method, body, headers) {
       credentials: 'include',
     }
   );
-  if (results.ok) return await results.json();
+  if (results.ok && results.status !== 204) return await results.json();
   else return results;
 }
 

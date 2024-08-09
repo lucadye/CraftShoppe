@@ -17,7 +17,7 @@ import SignUp from './SignUp';
 import Cart from './Cart';
 import Orders from './Orders';
 import OrderDetails from './OrderDetails';
-import Checkout from './Checkout';
+import {Checkout, CheckoutReturn} from './Checkout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -66,6 +66,11 @@ const router = createBrowserRouter(
       <Route path="checkout" element={
         <VerifyAuthed>
           <Checkout/>
+        </VerifyAuthed>
+      }/>
+      <Route path="checkout/return" element={
+        <VerifyAuthed>
+          <CheckoutReturn/>
         </VerifyAuthed>
       }/>
     </Route>

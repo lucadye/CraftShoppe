@@ -43,3 +43,7 @@ export async function getProductList(id) {
 export async function patchProductList(id, list) {
   return await api.PATCH('/product-lists/' + id, {products: list});
 }
+
+export async function createProductList(list) {
+  return await api.POST('/product-lists/', list);
+}

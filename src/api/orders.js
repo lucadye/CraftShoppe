@@ -32,6 +32,15 @@ export async function getOrder(orderId) {
   return order;
 }
 
+export async function getLatestOrder() {
+  const {user} = getState();
+  const order = await api.GET(`/users/${user.id}/orders/latest`);
+  order.status = formatStatus(order);
+  order.datetime = formatDate(order.datetime);
+  order.productList = (await getProductList(order.list_id)).products;
+  return order;
+}
+
 export async function checkout(name, password) {
   return await api.POST('/checkout');
 }

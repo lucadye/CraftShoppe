@@ -23,3 +23,4 @@ const store = configureStore({
 export default store;
 
 export const getState = store.getState;
+export const dispatch = store.dispatch;

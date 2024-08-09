@@ -139,6 +139,7 @@ function ProductDetails() {
       showAlert={showAlert}
       setShowAlert={setShowAlert}
       amount={amount}
+      setRedirectUrl={setRedirectUrl}
     >
       <Col md={6}>
         { product.images.length > 1 ? (
