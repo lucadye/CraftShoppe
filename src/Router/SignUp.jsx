@@ -1,5 +1,5 @@
 import { signUp } from '../api/auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,7 @@ import { Link, Navigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../store/userSlice';
-import { validEmail, validPassword } from '../helpers';
+import { validEmail, validPassword, passwordRequirements } from '../helpers';
 
 function SignUp() {
   const user = useSelector((state) => state.user);
@@ -18,12 +18,17 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
+  useEffect(() => setEmailIsValid(validEmail(email)), [email]);
+  useEffect(() => setPasswordIsValid(validPassword(password)), [password]);
+
   if (user.signedIn) return <Navigate to="/"/>;
   
   async function onSubmit(e) {
     e.preventDefault();
     const results = await signUp(email, password);
-    console.log(results);
+    if (results === null) return;
     setUser({
       ...results,
       signedIn: true,
@@ -39,9 +44,6 @@ function SignUp() {
     e.preventDefault();
     setPassword(e.target.value);
   }
-
-  const emailIsValid = validEmail(email);
-  const passwordIsValid = validPassword(password);
 
   return (
       <Container fluid>
@@ -73,13 +75,17 @@ function SignUp() {
             Password
           </Form.Label>
           <Form.Control
-            type="password"
+            type="text"
             placeholder="Enter Password"
             aria-label="Password"
             onChange={onPasswordChange}
             isValid={passwordIsValid}
             isInvalid={!passwordIsValid && password !== ''}
           />
+          <Form.Text 
+            className="text-muted">
+            {passwordRequirements(password)}
+          </Form.Text>
         </Form.Group>
 
         <Button
