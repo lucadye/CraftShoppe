@@ -105,7 +105,7 @@ function Cart() {
   const [cart, setCart] = useState(undefined);
   useEffect(() => {
     getCart().then(c => {
-      setCart(c);
+      setCart(c ? c : null);
     });
   }, [reloadValue]);
 

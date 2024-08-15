@@ -142,19 +142,31 @@ function ProductDetails() {
       setRedirectUrl={setRedirectUrl}
     >
       <Col md={6}>
+        <div style={{width: '100%', height: '24rem'}}>
         { product.images.length > 1 ? (
-          <Carousel>
+          <Carousel style={{width: 'inherit', height: 'inherit'}}>
             {product.images.map((src, key) => {
               return (
                 <Carousel.Item key={key}>
-                  <img src={src} alt={product.name}/>
+                  <img style={{
+                    width: '100%',
+                    height: '24rem',
+                    objectFit: 'contain',
+                    backgroundColor: 'black',
+                  }} src={src} alt={product.name}/>
                 </Carousel.Item>
               );
             })}
           </Carousel>
         ) : product.images.length === 1 ? (
-          <img style={{width: '100%'}} src={product.images[0]} alt={product.name}/>
+          <img style={{
+            width: '100%',
+            height: '24rem',
+            objectFit: 'contain',
+            backgroundColor: 'black',
+          }} src={product.images[0]} alt={product.name}/>
         ) : ''}
+        </div>
       </Col>
       <Col md>
         <div className="d-flex flex-column justify-content-left" style={{width: '100%', height: '100%'}}>

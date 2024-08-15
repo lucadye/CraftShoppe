@@ -22,7 +22,6 @@ function Card({title, src: imgSrc, children, button: Btn, singleElement, contact
           </Placeholder>
           <Container className="d-flex justify-content-left gap-4">
             <Placeholder.Button variant="primary" xs={5} />
-            <Placeholder.Button variant="primary" xs={5} />
           </Container>
         </BCard.Body>
       </BCard>
