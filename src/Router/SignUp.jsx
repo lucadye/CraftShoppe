@@ -18,6 +18,9 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [emailMessage, setEmailMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   useEffect(() => setEmailIsValid(validEmail(email)), [email]);
@@ -28,7 +31,14 @@ function SignUp() {
   async function onSubmit(e) {
     e.preventDefault();
     const results = await signUp(email, password);
-    if (results === null) return;
+    if (results === 'Invalid password') {
+      setPasswordMessage('Password is invalid.')
+      return setPasswordIsValid(false);
+    }
+    if (results === 'Name already in use') {
+      setEmailMessage('Email already in use.');
+      return setEmailIsValid(false);
+    }
     setUser({
       ...results,
       signedIn: true,
@@ -66,6 +76,7 @@ function SignUp() {
           <Form.Text 
             className="text-muted">
             We'll never share your email with anyone else.
+            {emailMessage ? <><br/>{emailMessage}</> : ''}
           </Form.Text>
         </Form.Group>
 
@@ -84,7 +95,7 @@ function SignUp() {
           />
           <Form.Text 
             className="text-muted">
-            {passwordRequirements(password)}
+            {passwordRequirements(password) || passwordMessage}
           </Form.Text>
         </Form.Group>
 

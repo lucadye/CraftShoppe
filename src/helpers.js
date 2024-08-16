@@ -24,14 +24,13 @@ export function validPassword(pass) {
   return valid;
 }
 
-// At least 1 of each: lowercase letter, capital letter, number, symbol.
 export function passwordRequirements(pass) {
   if (pass === null) return;
   if (pass.length < 12) return 'Password must contain at least 12 characters.';
-  if (!/[&*#!%@$.^_-]/.test(pass)) return 'Password must contain at least 1 symbol.';
-  if (!/[0-9]/.test(pass)) return 'Password must contain at least 1 number.';
-  if (!/[A-Z]/.test(pass)) return 'Password must contain at least 1 uppercase letter.';
   if (!/[a-z]/.test(pass)) return 'Password must contain at least 1 lowercase letter.';
+  if (!/[A-Z]/.test(pass)) return 'Password must contain at least 1 uppercase letter.';
+  if (!/[0-9]/.test(pass)) return 'Password must contain at least 1 number.';
+  if (!/[&*#!%@$.^_-]/.test(pass)) return 'Password must contain at least 1 symbol.';
   return '';
 }
 
