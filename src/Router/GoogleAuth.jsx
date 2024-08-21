@@ -20,6 +20,7 @@ export function GoogleAuthCallback () {
   useEffect(() => {(async () => {
     if (done) return;
     const userData = await googleAuth();
+    if (!userData) return;
     setUser({
       ...userData,
       signedIn: true,
