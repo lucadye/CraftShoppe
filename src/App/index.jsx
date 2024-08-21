@@ -10,10 +10,10 @@ import Footer from '../Footer';
 import {GoogleAuthCallback} from '../Router/GoogleAuth';
 
 function App() {
+  const path = formatPath(useLocation().pathname);
   if (extractQueryParams(window.location.href)) {
     return <GoogleAuthCallback/>;
   }
-  const path = formatPath(useLocation().pathname);
   return (<>
     <Header currentPage={path} />
     <div className="false-header" />
