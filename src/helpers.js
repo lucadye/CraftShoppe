@@ -77,3 +77,11 @@ export function formatDate(str) {
   const day = datetime.getDate();
   return `${year} ${month} ${day}`;
 }
+
+export function extractQueryParams(url) {
+  const regex = /.+(\?.+)$/;
+  const match = url.match(regex);
+  if (match === null) return;
+  return match[1];
+  //return url.match(/.+(\?.+)$/)[1];
+}

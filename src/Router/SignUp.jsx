@@ -111,6 +111,10 @@ function SignUp() {
           >Already have an account? <Link to="/login">Log in here!</Link>
         </p>
 
+        <p className="text-muted" style={{marginTop: '1rem'}}>
+          Prefer to sign up another way? <Link to="/auth/google">Sign up with Google!</Link>
+        </p>
+
       </Form>
     </Container>
   );

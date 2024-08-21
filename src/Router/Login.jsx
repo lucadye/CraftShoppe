@@ -71,7 +71,7 @@ function Login() {
             onChange={onEmailChange}
             value={email}
           />
-          <Form.Text 
+          <Form.Text
             className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -103,7 +103,12 @@ function Login() {
           >Don't have an account? <Link to="/sign-up">Sign up here!</Link>
         </p>
 
+        <p className="text-muted" style={{marginTop: '1rem'}}>
+          Prefer to sign in another way? <Link to="/auth/google">Sign in with Google!</Link>
+        </p>
+
       </Form>
+
     </Container>
   );
 }

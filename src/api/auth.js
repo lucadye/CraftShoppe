@@ -1,4 +1,5 @@
 import api from './index';
+import { extractQueryParams } from '../helpers';
 
 export async function signIn(name, password) {
   return await api.POST('/auth/sign-in', {
@@ -17,4 +18,10 @@ export async function signUp(name, password) {
   if (result.ok) return await api.parse(result);
   if (result.status === 400) return result.text();
   return result;
+}
+
+export async function googleAuth() {
+  const endpoint = '/auth/google/callback';
+  const params = extractQueryParams(window.location.href);
+  return await api.GET(endpoint + params);;
 }
