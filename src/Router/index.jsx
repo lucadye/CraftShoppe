@@ -14,7 +14,7 @@ import ProductDetails from './ProductDetails';
 import Login from './Login';
 import Logout from './Logout';
 import SignUp from './SignUp';
-import {GoogleAuth, GoogleAuthCallback} from './GoogleAuth';
+import {GoogleAuth} from './GoogleAuth';
 import Cart from './Cart';
 import Orders from './Orders';
 import OrderDetails from './OrderDetails';
@@ -51,9 +51,6 @@ const router = createBrowserRouter(
       }/>
       <Route path="auth/google" element={
         <GoogleAuth/>
-      }/>
-      <Route path="auth/google/callback" element={
-        <GoogleAuthCallback/>
       }/>
       <Route path="cart" element={
         <VerifyAuthed>

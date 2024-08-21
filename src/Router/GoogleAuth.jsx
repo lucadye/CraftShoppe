@@ -27,8 +27,6 @@ export function GoogleAuthCallback () {
     setDone(true);
   })()});
 
-  if (done) return (
-    <Navigate to="../../../"/>
-  );
-  else return null;
+  if (done) window.location.href = process.env.REACT_APP_CLIENT_URL;
+  return null;
 }
