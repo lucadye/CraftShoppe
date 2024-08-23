@@ -28,6 +28,6 @@ export function GoogleAuthCallback () {
     setDone(true);
   })()});
 
-  if (done) window.location.href = process.env.REACT_APP_CLIENT_URL;
+  if (done) <Navigate to="/"/>//window.location.href = process.env.REACT_APP_CLIENT_URL;
   return null;
 }
